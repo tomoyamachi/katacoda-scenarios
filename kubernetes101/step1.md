@@ -17,7 +17,9 @@ Kubernetesは、原則、以下の構成でクラスターをつくります。
 
 Kubernetes APIが動作していれば、以下のような情報が出てきます。
 
-```yaml
+
+```
+
 apiVersion: v1
 clusters:
 - cluster:
@@ -37,4 +39,5 @@ users:
   user:
     client-certificate-data: REDACTED
     client-key-data: REDACTED
+
 ```
