@@ -30,7 +30,7 @@ Kubernetes APIの認証/認可方法は複数ありますが、ここでは詳�
 
 以下の方法では、Kubernetes APIに、クライアント証明書と秘密鍵を利用してアクセスします。
 
-```
+```sh
 cat /etc/kubernetes/admin.conf | grep client-certificate-data | awk '{print $2}' | base64 -d > client.crt
 cat /etc/kubernetes/admin.conf | grep client-key-data | awk '{print $2}' | base64 -d > client.key
 curl --cert ./client.crt --key ./client.key $(kubectl config view --minify | grep server | cut -f 2- -d ":" | tr -d " ")/api --insecure
@@ -38,7 +38,7 @@ curl --cert ./client.crt --key ./client.key $(kubectl config view --minify | gre
 
 ## Authorizationヘッダを利用する
 
-```
+```sh
 APISERVER=$(kubectl config view --minify | grep server | cut -f 2- -d ":" | tr -d " ")
 SECRET_NAME=$(kubectl get secrets | grep ^default | cut -f1 -d ' ')
 TOKEN=$(kubectl describe secret $SECRET_NAME | grep -E '^token' | cut -f2 -d':' | tr -d " ")

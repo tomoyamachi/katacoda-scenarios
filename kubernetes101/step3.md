@@ -16,7 +16,7 @@ DeploymentはPodを作成します。Podとは、1つ以上のコンテナが入
 
 そして、Deploymentは複数のPodを管理することができます。以下のコマンドで、`echo-server`のDeploymentを編集し、つねに対象のPodが3個動作するようにします。
 
-`kubectl scale --replicas=3 deployment/echo-server`
+`kubectl scale --replicas=3 deployment/echo-node`{{execute}}
 
 確認すると、Podが増えたのがわかります。
 
@@ -24,7 +24,7 @@ DeploymentはPodを作成します。Podとは、1つ以上のコンテナが入
 
 試しに、`kubectl delete pods/<podの名前>`で1つのPodを削除しても、自動で3つのPodに回復することがわかります。
 
-```
+```sh
 $ kubectl get pods
 NAME                        READY   STATUS    RESTARTS   AGE
 echo-node-756866fc9-jrzfc   1/1     Running   0          2m58s
@@ -58,8 +58,14 @@ YAMLファイルの書き方を覚えるのは大変なので、すこしズル�
 
 `kubectl delete deployment/echo-node`{{execute}}
 
-`kubectl get pods`を実行して、Podがなくなったのを確認したら、さきほどのYAMLファイルからDeploymentオブジェクトをつくりましょう。
+Deploymentが削除したあとも、紐づくPodが削除されるまで少し時間がかかります。
+
+`kubectl get pods`{{execute}}
+
+Podがなくなったのを確認したら、さきほどのYAMLファイルからDeploymentオブジェクトをつくりましょう。
 
 `kubectl apply -f ./deploy.yaml`{{execute}}
 
 先ほどと同じように、3つのPodが作成されるのがわかります。
+
+`kubectl get pods`{{execute}}

@@ -9,9 +9,9 @@
 もしもあなたがKubernetesを本当に利用するのであれば、これから100万回 `kubectl`と打ち込むことになるでしょう。
 以下のように、`kubectl`を`k`で呼び出せるようにしておくと、あなたの腱鞘炎を防ぐことができます。
 
-```
+```sh
 source <(kubectl completion bash)
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 alias k=kubectl
 complete -F __start_kubectl k
-```
+```{{execute}}
