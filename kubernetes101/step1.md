@@ -9,6 +9,9 @@ Kubernetesは、原則、以下の構成でクラスターをつくります。
 - 1つのControl Plane : 管理システム
 - 1つ以上のNode : 実際にアプリケーションを動かす
 
+![cluster](./assets/module_01_cluster.svg)
+> https://kubernetes.io/docs/tutorials/kubernetes-basics/
+
 `以前は、Master NodeとWorker Nodeと呼ばれていましたが、奴隷制を喚起させる呼称で不適切だという批判があり、名称が変更されました。過去の記事を読むときは、古い呼称が使われているので変換してください。`
 
 そして、Kubernetesは、Control Planeで動いているKubernetes APIを利用して、クラスターを操作することができます。実際に動かしてみましょう。

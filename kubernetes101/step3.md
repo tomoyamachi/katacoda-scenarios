@@ -12,6 +12,8 @@ Kubernetesには多くの種類のオブジェクトがありますが、今回�
 
 DeploymentはPodを作成します。Podとは、1つ以上のコンテナが入った最低限の実行単位です。まずはPodを確認してみましょう。1つのPodが作成されているはずです。
 
+![](./assets/module_02_first_app.svg)
+
 `kubectl get pods`{{execute}}
 
 そして、Deploymentは複数のPodを管理することができます。以下のコマンドで、`echo-server`のDeploymentを編集し、つねに対象のPodが3個動作するようにします。
@@ -22,7 +24,7 @@ DeploymentはPodを作成します。Podとは、1つ以上のコンテナが入
 
 `kubectl get pods`{{execute}}
 
-試しに、`kubectl delete pods/<podの名前>`で1つのPodを削除しても、自動で3つのPodに回復することがわかります。
+試しに`kubectl delete pods/<podの名前>`で1つのPodを削除しても、自動で3つのPodに回復することがわかります。
 
 ```sh
 $ kubectl get pods

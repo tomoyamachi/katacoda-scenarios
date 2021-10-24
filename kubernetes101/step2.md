@@ -1,6 +1,6 @@
 # cURLでKubernetes APIを呼び出す
 
-`kubectl config view`で、現在操作しているKubernetes APIの情報がわかります。
+さきほど実行した`kubectl config view`の項目で、現在操作しているKubernetes APIの情報がわかります。
 
 `curl $(kubectl config view --minify | grep server | cut -f 2- -d ":" | tr -d " ")/api --insecure`{{execute}}
 
@@ -24,7 +24,7 @@
 }
 ```
 
-Kubernetes APIの認証/認可方法は複数ありますが、ここでは詳細を述べませんが、Kubernetesの深淵をすこしのぞくために、2つの方法でアクセスしてみましょう。
+Kubernetes APIの認証/認可方法は複数あります。ここでは詳細を述べませんが、Kubernetesの深淵をすこしのぞくために、2つの方法でアクセスしてみましょう。
 
 ## クライアント証明書と秘密鍵を利用する
 
@@ -49,3 +49,4 @@ curl $APISERVER/api --header "Authorization: Bearer $TOKEN" --insecure
 
 KubernetesがAPI経由で動作していること、`kubectl`はKubernetes APIを動作させるためのツールであることが学べたと思います。
 
+`Kubernetesは、大規模な複数のコンテナを、複数のサーバー上で動かすことが前提になってます。そのため、デフォルトでもある程度APIの保護はされていますが、攻撃されやすい部分であるため、理解した上で適切に保護することが重要です。`
