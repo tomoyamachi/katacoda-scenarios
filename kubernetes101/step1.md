@@ -12,14 +12,17 @@ Kubernetesは、原則、以下の構成でクラスターをつくります。
 ![cluster](./assets/module_01_cluster.svg)
 > https://kubernetes.io/docs/tutorials/kubernetes-basics/
 
+以下のコマンドを実行して、Kubernetesクラスターの情報を確認しましょう。
+
+`kubectl cluster-info`{{execute}}
+
 `以前は、Master NodeとWorker Nodeと呼ばれていましたが、奴隷制を喚起させる呼称で不適切だという批判があり、名称が変更されました。過去の記事を読むときは、古い呼称が使われているので変換してください。`
 
-そして、Kubernetesは、Control Planeで動いているKubernetes APIを利用して、クラスターを操作することができます。実際に動かしてみましょう。
+Kubernetesは、Control Planeで動いているKubernetes APIを利用して、クラスターを操作することができます。次のコマンドを動かしてみましょう。
 
 `kubectl config view`{{execute}}
 
-Kubernetes APIが動作していれば、以下のような情報が出てきます。
-
+KubernetesとKubernetes APIが動作していれば、以下のような情報が出てきます。
 
 ```
 
