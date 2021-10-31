@@ -1,7 +1,31 @@
+# ファイルで宣言する
+
+ここまでは、Kubernetesオブジェクトをインタラクティブに作ってきました。 しかし、毎回、手動で構成管理をするのは大変です。
+Kubernetesを運用する際は、KubernetesオブジェクトのYAMLファイルを作っておき、そのファイルを利用してオブジェクトを作るのが一般的です。
+
+YAMLファイルの書き方を覚えるのは大変なので、すこしズルをして、現在動いているDeploymentの情報をYAMLファイルに保存します。
+
+`kubectl get deployment/echo-node -o yaml > deploy.yaml`{{execute}}
+
+そして、Deploymentを消します。コマンドを実行し、Deploymentが削除されたあとに、さらに待つと、Deploymentに紐づくPodが消えます。
+
+`kubectl delete deployment/echo-node`{{execute}}
+
+Deploymentが削除したあとも、紐づくPodが削除されるまで少し時間がかかります。
+
+`kubectl get pods`{{execute}}
+
+Podがなくなったのを確認したら、さきほどのYAMLファイルからDeploymentオブジェクトをつくりましょう。
+
+`kubectl apply -f ./deploy.yaml`{{execute}}
+
+先ほどと同じように、3つのPodが作成されるのがわかります。
+
+`kubectl get pods`{{execute}}
+
 # YAMLファイルの書き方
 
-さきほど自動生成したファイルには不要な情報も入っています。必要最低限の情報だけを記入したYAMLファイルは以下のようになります。運用する場合、このようなファイルをたくさん作ってInfrastructure as Code (IaC)を実現します。
-
+既存のリソースから自動生成したファイルには不要な情報も入っています。必要最低限の情報だけを記入したYAMLファイルは以下のようになります。運用する場合、このようなファイルをたくさん作ってInfrastructure as Code (IaC)を実現します。
 
 ```
 
@@ -27,23 +51,3 @@ spec:
         imagePullPolicy: IfNotPresent
 
 ```
-
-
-# 最後に
-
-ここで説明したことは、Kubernetesを動かす上で必要な知識のほんの一部です。
-本番環境でKubernetesを動かすには、膨大な知識が必要になるでしょう。
-
-幸いなことに[Kubernetesの公式ドキュメント](https://kubernetes.io/ja/docs/home/)は日本語版も充実しており、多くの書籍や動画があります。ここで得た理解をもとに、さらに理解を深めていただけると幸いです。
-
-# Tips
-
-もしもあなたがKubernetesを本当に利用するのであれば、これから100万回 `kubectl`と打ち込むことになるでしょう。
-以下のように、`kubectl`を`k`で呼び出せるようにしておくと、あなたの腱鞘炎を防ぐことができます。
-
-```sh
-source <(kubectl completion bash)
-echo "source <(kubectl completion bash)" >> ~/.bashrc
-alias k=kubectl
-complete -F __start_kubectl k
-```{{execute}}

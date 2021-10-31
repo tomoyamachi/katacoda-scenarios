@@ -43,31 +43,6 @@ echo-node-756866fc9-jrzfc   1/1     Running   0          4m12s
 echo-node-756866fc9-mwdzf   1/1     Running   0          4m12s
 ```
 
-# 宣言的アプローチによる自己回復
+# 自己回復
 
-ここまでみたように、Kubernetesは理想的な状態を事前に宣言しておくと、理想的な状態を保つように動作します。 このことを宣言的アプローチによる、Self-healing(自己回復)と呼びます。
-
-# ファイルで宣言する
-
-ここまでは、Kubernetesオブジェクトをインタラクティブに作ってきました。 しかし、毎回、手動で構成管理をするのは大変です。
-Kubernetesを運用する際は、KubernetesオブジェクトのYAMLファイルを作っておき、そのファイルを利用してオブジェクトを作るのが一般的です。
-
-YAMLファイルの書き方を覚えるのは大変なので、すこしズルをして、現在動いているDeploymentの情報をYAMLファイルに保存します。
-
-`kubectl get deployment/echo-node -o yaml > deploy.yaml`{{execute}}
-
-そして、Deploymentを消します。コマンドを実行し、Deploymentが削除されたあとに、さらに待つと、Deploymentに紐づくPodが消えます。
-
-`kubectl delete deployment/echo-node`{{execute}}
-
-Deploymentが削除したあとも、紐づくPodが削除されるまで少し時間がかかります。
-
-`kubectl get pods`{{execute}}
-
-Podがなくなったのを確認したら、さきほどのYAMLファイルからDeploymentオブジェクトをつくりましょう。
-
-`kubectl apply -f ./deploy.yaml`{{execute}}
-
-先ほどと同じように、3つのPodが作成されるのがわかります。
-
-`kubectl get pods`{{execute}}
+ここまでみたように、Kubernetesは状態を定義すると、理想的な状態を保つように動作します。 このことをSelf-healing(自己回復)と呼びます。
